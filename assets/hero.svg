@@ -1,24 +1,283 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" role="img" aria-labelledby="title desc">
-<title id="title">Abstract intelligent systems visualization</title>
-<desc id="desc">Minimal dark visualization of connected systems, data flow and machine learning signals.</desc>
-<defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07090d"/><stop offset="1" stop-color="#10151d"/></linearGradient>
-  <radialGradient id="glow"><stop stop-color="#60a5fa" stop-opacity=".14"/><stop offset="1" stop-color="#60a5fa" stop-opacity="0"/></radialGradient>
-  <linearGradient id="flow"><stop stop-color="#60a5fa" stop-opacity=".05"/><stop offset=".5" stop-color="#93c5fd" stop-opacity=".55"/><stop offset="1" stop-color="#60a5fa" stop-opacity=".04"/></linearGradient>
-</defs>
-<rect width="1600" height="500" fill="url(#bg)"/>
-<circle cx="1250" cy="100" r="320" fill="url(#glow)"/>
-<g opacity=".09" stroke="#cbd5e1" stroke-width="1">
- <path d="M0 100H1600M0 200H1600M0 300H1600M0 400H1600"/>
- <path d="M200 0V500M400 0V500M600 0V500M800 0V500M1000 0V500M1200 0V500M1400 0V500"/>
-</g>
-<g fill="none" stroke="url(#flow)" stroke-width="2">
- <path d="M720 250 L860 170 L1010 245 L1160 135 L1320 210 L1480 115"/>
- <path d="M860 170 L930 355 L1080 300 L1160 135"/>
- <path d="M1010 245 L1080 300 L1320 210 L1420 365"/>
-</g>
-<g fill="#93c5fd">
- <circle cx="720" cy="250" r="4"/><circle cx="860" cy="170" r="5"/><circle cx="1010" cy="245" r="4"/><circle cx="1160" cy="135" r="5"/><circle cx="1320" cy="210" r="4"/><circle cx="1480" cy="115" r="4"/><circle cx="930" cy="355" r="4"/><circle cx="1080" cy="300" r="5"/><circle cx="1420" cy="365" r="4"/>
-</g>
-<path d="M0 455 C320 420 480 470 700 430 S1080 455 1600 390" fill="none" stroke="#60a5fa" stroke-opacity=".07" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" width="100%" height="100%" role="img" aria-label="Ashish Lal // Quantum AI Systems Telemetry">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060c"/>
+      <stop offset="50%" stop-color="#080d1a"/>
+      <stop offset="100%" stop-color="#0c071a"/>
+    </linearGradient>
+
+    <radialGradient id="quantumGlowCyan" cx="75%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#0284c7" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="quantumGlowPurple" cx="20%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#7e22ce" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Linear Flow Gradients -->
+    <linearGradient id="streamGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <linearGradient id="streamGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Filter Glow -->
+    <filter id="neonGlowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="neonGlowPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Embedded CSS Animation Styles -->
+    <style>
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.35; transform: scale(1); }
+        50% { opacity: 0.85; transform: scale(1.08); }
+      }
+
+      @keyframes streamFlow {
+        0% { stroke-dashoffset: 400; }
+        100% { stroke-dashoffset: 0; }
+      }
+
+      @keyframes streamFlowReverse {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: 400; }
+      }
+
+      @keyframes radarSweep {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @keyframes blinker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.2; }
+      }
+
+      @keyframes waveDrift {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(25px); }
+        100% { transform: translateX(0); }
+      }
+
+      .pulse-node {
+        transform-origin: center;
+        animation: pulseGlow 4s ease-in-out infinite;
+      }
+      .node-delay-1 { animation-delay: 0.7s; }
+      .node-delay-2 { animation-delay: 1.4s; }
+      .node-delay-3 { animation-delay: 2.1s; }
+      .node-delay-4 { animation-delay: 2.8s; }
+
+      .flow-path-1 {
+        stroke-dasharray: 20 180;
+        animation: streamFlow 5s linear infinite;
+      }
+      .flow-path-2 {
+        stroke-dasharray: 25 150;
+        animation: streamFlow 4s linear infinite;
+      }
+      .flow-path-3 {
+        stroke-dasharray: 30 200;
+        animation: streamFlowReverse 6s linear infinite;
+      }
+
+      .status-blink {
+        animation: blinker 2s step-end infinite;
+      }
+
+      .radar-arm {
+        transform-origin: 1350px 140px;
+        animation: radarSweep 10s linear infinite;
+      }
+
+      .drift-grid {
+        animation: waveDrift 8s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Deep Background -->
+  <rect width="1600" height="520" fill="url(#bgGrad)"/>
+  <rect width="1600" height="520" fill="url(#quantumGlowCyan)"/>
+  <rect width="1600" height="520" fill="url(#quantumGlowPurple)"/>
+
+  <!-- Telemetry Coordinate Grid -->
+  <g opacity="0.07" stroke="#94a3b8" stroke-width="1">
+    <path d="M0 60H1600M0 130H1600M0 200H1600M0 270H1600M0 340H1600M0 410H1600M0 480H1600"/>
+    <path d="M100 0V520M250 0V520M400 0V520M550 0V520M700 0V520M850 0V520M1000 0V520M1150 0V520M1300 0V520M1450 0V520"/>
+  </g>
+
+  <!-- High-Tech Corner HUD Brackets -->
+  <g stroke="#38bdf8" stroke-width="2" fill="none" opacity="0.4">
+    <path d="M25 50 V25 H50" />
+    <path d="M1575 50 V25 H1550" />
+    <path d="M25 470 V495 H50" />
+    <path d="M1575 470 V495 H1550" />
+  </g>
+
+  <!-- Top Telemetry Status Header in SVG -->
+  <g font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#64748b" opacity="0.85">
+    <text x="60" y="45" fill="#38bdf8" font-weight="bold">ASHISH_LAL // QUANTUM AI ARCHITECTURE</text>
+    <text x="460" y="45">SYS_ID: <tspan fill="#e2e8f0">0x7F-WEIRDGAMER20</tspan></text>
+    <text x="730" y="45">STATUS: <tspan fill="#34d399" class="status-blink">● ONLINE // ZERO_DRIFT</tspan></text>
+    <text x="1080" y="45">INVARIANTS: <tspan fill="#38bdf8">DETERMINISTIC BOUNDARIES</tspan></text>
+    <text x="1420" y="45" fill="#c084fc">AQTRO-SIH26</text>
+  </g>
+
+  <!-- Interactive Quantum Radar Scanner (Top-Right) -->
+  <g opacity="0.4">
+    <circle cx="1350" cy="140" r="90" fill="none" stroke="#38bdf8" stroke-width="1" stroke-dasharray="3 3"/>
+    <circle cx="1350" cy="140" r="60" fill="none" stroke="#38bdf8" stroke-width="1"/>
+    <circle cx="1350" cy="140" r="30" fill="none" stroke="#818cf8" stroke-width="1"/>
+    <line x1="1240" y1="140" x2="1460" y2="140" stroke="#38bdf8" stroke-width="0.8" opacity="0.5"/>
+    <line x1="1350" y1="30" x2="1350" y2="250" stroke="#38bdf8" stroke-width="0.8" opacity="0.5"/>
+    <line x1="1350" y1="140" x2="1410" y2="80" stroke="#38bdf8" stroke-width="2" class="radar-arm" filter="url(#neonGlowCyan)"/>
+  </g>
+
+  <!-- Left Side: Identity & Systems Focus Text -->
+  <g transform="translate(60, 160)">
+    <!-- Subtitle Pill -->
+    <rect x="0" y="0" width="310" height="28" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="14" y="18" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#38bdf8" font-weight="600">
+      ⚡ AI SYSTEMS · RL · RESEARCH · BACKEND
+    </text>
+
+    <!-- Main Title -->
+    <text x="0" y="85" font-family="'Inter', system-ui, sans-serif" font-size="54" font-weight="900" fill="#ffffff" letter-spacing="-1">
+      ASHISH LAL
+    </text>
+
+    <!-- Mission / Manifesto -->
+    <text x="0" y="125" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="15" fill="#93c5fd" font-weight="500">
+      &gt; "Build systems, not demos."
+    </text>
+
+    <text x="0" y="160" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#94a3b8">
+      Separating learned strategy from deterministic risk, execution, and verification.
+    </text>
+
+    <!-- Domain Tags Badges in SVG -->
+    <g transform="translate(0, 195)" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11">
+      <!-- Tag 1 -->
+      <rect x="0" y="0" width="105" height="26" rx="4" fill="#032b44" stroke="#0284c7" stroke-width="0.8"/>
+      <text x="12" y="17" fill="#38bdf8">RL &amp; Agents</text>
+
+      <!-- Tag 2 -->
+      <rect x="115" y="0" width="135" height="26" rx="4" fill="#1e1035" stroke="#7e22ce" stroke-width="0.8"/>
+      <text x="127" y="17" fill="#c084fc">Quantum VRP</text>
+
+      <!-- Tag 3 -->
+      <rect x="260" y="0" width="130" height="26" rx="4" fill="#062e24" stroke="#059669" stroke-width="0.8"/>
+      <text x="272" y="17" fill="#34d399">Rust &amp; Python</text>
+
+      <!-- Tag 4 -->
+      <rect x="400" y="0" width="145" height="26" rx="4" fill="#20150a" stroke="#d97706" stroke-width="0.8"/>
+      <text x="412" y="17" fill="#fbbf24">Risk Boundaries</text>
+    </g>
+  </g>
+
+  <!-- Right Side: Complex Interactive Quantum Neural Graph -->
+  <!-- Static Base Topology Lines -->
+  <g fill="none" stroke="#1e293b" stroke-width="1.2">
+    <path d="M780 340 L880 230 L1020 280 L1140 180 L1280 260 L1440 160"/>
+    <path d="M880 230 L940 410 L1090 360 L1140 180"/>
+    <path d="M1020 280 L1090 360 L1280 260 L1360 410 L1440 160"/>
+    <path d="M780 340 L940 410 L1200 450 L1360 410"/>
+    <path d="M1140 180 L1240 110 L1350 140 L1480 230"/>
+    <path d="M880 230 L1040 140 L1240 110"/>
+  </g>
+
+  <!-- Dynamic Animated Streaming Signal Lines -->
+  <g fill="none" stroke-width="2.5" filter="url(#neonGlowCyan)">
+    <!-- Stream 1 -->
+    <path d="M780 340 L880 230 L1020 280 L1140 180 L1280 260 L1440 160" stroke="url(#streamGrad1)" class="flow-path-1"/>
+    <!-- Stream 2 -->
+    <path d="M880 230 L940 410 L1090 360 L1140 180" stroke="url(#streamGrad2)" class="flow-path-2"/>
+    <!-- Stream 3 -->
+    <path d="M1020 280 L1090 360 L1280 260 L1360 410 L1440 160" stroke="#38bdf8" stroke-opacity="0.8" class="flow-path-3"/>
+    <!-- Stream 4 -->
+    <path d="M1040 140 L1140 180 L1240 110 L1350 140" stroke="#c084fc" stroke-opacity="0.9" class="flow-path-1"/>
+  </g>
+
+  <!-- Quantum Lattice Entangled Nodes -->
+  <g>
+    <!-- Node 1 (780, 340) -->
+    <circle cx="780" cy="340" r="5" fill="#38bdf8" filter="url(#neonGlowCyan)"/>
+    <circle cx="780" cy="340" r="11" fill="none" stroke="#38bdf8" stroke-width="1" class="pulse-node"/>
+
+    <!-- Node 2 (880, 230) -->
+    <circle cx="880" cy="230" r="6" fill="#38bdf8" filter="url(#neonGlowCyan)"/>
+    <circle cx="880" cy="230" r="14" fill="none" stroke="#38bdf8" stroke-width="1" class="pulse-node node-delay-1"/>
+
+    <!-- Node 3 (940, 410) -->
+    <circle cx="940" cy="410" r="5" fill="#818cf8"/>
+    <circle cx="940" cy="410" r="10" fill="none" stroke="#818cf8" stroke-width="1" class="pulse-node node-delay-2"/>
+
+    <!-- Node 4 (1040, 140) -->
+    <circle cx="1040" cy="140" r="6" fill="#c084fc" filter="url(#neonGlowPurple)"/>
+    <circle cx="1040" cy="140" r="13" fill="none" stroke="#c084fc" stroke-width="1" class="pulse-node node-delay-3"/>
+
+    <!-- Node 5 (1020, 280) -->
+    <circle cx="1020" cy="280" r="5" fill="#38bdf8"/>
+    <circle cx="1020" cy="280" r="11" fill="none" stroke="#38bdf8" stroke-width="1" class="pulse-node node-delay-1"/>
+
+    <!-- Node 6 (1090, 360) -->
+    <circle cx="1090" cy="360" r="6" fill="#34d399"/>
+    <circle cx="1090" cy="360" r="12" fill="none" stroke="#34d399" stroke-width="1" class="pulse-node node-delay-4"/>
+
+    <!-- Node 7 (1140, 180) - Core Hub -->
+    <circle cx="1140" cy="180" r="8" fill="#ffffff" filter="url(#neonGlowCyan)"/>
+    <circle cx="1140" cy="180" r="18" fill="none" stroke="#38bdf8" stroke-width="1.5" class="pulse-node"/>
+
+    <!-- Node 8 (1240, 110) -->
+    <circle cx="1240" cy="110" r="5" fill="#c084fc"/>
+    <circle cx="1240" cy="110" r="11" fill="none" stroke="#c084fc" stroke-width="1" class="pulse-node node-delay-2"/>
+
+    <!-- Node 9 (1280, 260) -->
+    <circle cx="1280" cy="260" r="6" fill="#38bdf8"/>
+    <circle cx="1280" cy="260" r="13" fill="none" stroke="#38bdf8" stroke-width="1" class="pulse-node node-delay-3"/>
+
+    <!-- Node 10 (1360, 410) -->
+    <circle cx="1360" cy="410" r="5" fill="#818cf8"/>
+    <circle cx="1360" cy="410" r="10" fill="none" stroke="#818cf8" stroke-width="1" class="pulse-node node-delay-1"/>
+
+    <!-- Node 11 (1440, 160) -->
+    <circle cx="1440" cy="160" r="6" fill="#38bdf8" filter="url(#neonGlowCyan)"/>
+    <circle cx="1440" cy="160" r="14" fill="none" stroke="#38bdf8" stroke-width="1" class="pulse-node node-delay-2"/>
+
+    <!-- Node 12 (1480, 230) -->
+    <circle cx="1480" cy="230" r="5" fill="#c084fc"/>
+  </g>
+
+  <!-- Ambient Wave Dynamics at Base -->
+  <path d="M0 495 C350 470 600 515 950 480 S1350 500 1600 465" fill="none" stroke="#38bdf8" stroke-opacity="0.18" stroke-width="2"/>
+  <path d="M0 505 C400 480 750 510 1100 490 S1450 495 1600 480" fill="none" stroke="#818cf8" stroke-opacity="0.12" stroke-width="1.5"/>
+
+  <!-- Telemetry Footnote -->
+  <text x="60" y="490" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#475569">
+    [AUTONOMOUS_SYSTEMS // VERIFIED_EXECUTION // REPRODUCIBLE_RESEARCH]
+  </text>
 </svg>
